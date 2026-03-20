@@ -1,220 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qbay Career | Global Strategy Authenticated</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* --- INSTITUTIONAL DESIGN SYSTEM --- */
-        :root {
-            --navy-bg: #000814;
-            --qbay-blue: #0052CC;
-            --glass-white: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.12);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--navy-bg); color: white; overflow-x: hidden; scroll-behavior: smooth; line-height: 1.6; }
-
-        /* 1. Morphing Header (Modern Pill) */
-        #main-header {
-            position: fixed; top: 0; width: 100%; padding: 30px 6%;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1000;
-        }
-        .header-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { height: 42px; filter: brightness(1.1); }
-        nav ul { display: flex; list-style: none; gap: 40px; }
-        nav ul li a { color: white; text-decoration: none; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.5px; opacity: 0.7; transition: 0.3s; }
-        nav ul li a:hover { opacity: 1; }
-
-        .sticky-oval {
-            top: 15px !important; width: 92% !important; left: 4%;
-            background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(30px);
-            border-radius: 100px; border: 1px solid var(--glass-border);
-            padding: 14px 40px !important; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        /* 2. Hero Session & Background */
-        .hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        #bg-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.45) contrast(1.1); }
-
-        .hero-text { text-align: center; z-index: 5; animation: fadeInUp 1.2s ease-out; }
-        .hero-text h1 { font-size: 5rem; font-weight: 700; text-transform: uppercase; letter-spacing: -2px; line-height: 0.95; }
-        .hero-text h1 span { color: var(--qbay-blue); }
-
-        /* 3. Official Trust Bar (Top-Left) */
-        .trust-bar { position: absolute; top: 140px; left: 5%; display: flex; gap: 15px; z-index: 10; animation: fadeInLeft 1.5s ease-out; }
-        .pebble {
-            background: var(--glass-white); backdrop-filter: blur(15px);
-            padding: 10px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
-            border: 1px solid var(--glass-border); display: flex; align-items: center; gap: 10px;
-        }
-        .trust-logo { height: 16px; width: auto; }
-
-        /* 4. Sticky Left-Aligned CTAs (0px Gap) */
-        #sticky-cta-container { position: fixed; top: 86px; left: 6%; z-index: 999; display: none; }
-        #sticky-cta-container.visible { display: flex; animation: slideInLeft 0.5s forwards; }
-        .cta-bar { display: flex; gap: 12px; }
-        .cta-btn {
-            padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 600;
-            color: white; display: flex; align-items: center; gap: 12px; font-size: 0.85rem;
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .cta-btn img { height: 18px; width: 18px; }
-        .gmeet { background: #1a73e8; }
-        .whatsapp { background: #25D366; }
-        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-
-        /* 5. Executive VIP Card (Minimalist) */
-        .vip-section { padding: 120px 8%; background: var(--navy-bg); display: flex; justify-content: center; opacity: 0; transition: 1s; }
-        .vip-section.revealed { opacity: 1; transform: translateY(0); }
-        .vip-card {
-            background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(40px);
-            border-radius: 40px; padding: 60px; display: flex; align-items: center; gap: 50px;
-            max-width: 1100px; width: 100%; border: 1px solid var(--glass-border);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
-        }
-        .founder-img { width: 180px; height: 180px; border-radius: 50%; border: 1px solid var(--qbay-blue); object-fit: cover; }
-        .vip-content h2 { font-size: 2.8rem; margin-bottom: 20px; font-weight: 700; letter-spacing: -1px; }
-        .vip-content p { font-size: 1.1rem; opacity: 0.6; margin-bottom: 30px; font-weight: 300; }
-
-        /* 6. Success Journey (The 5 Phases) */
-        .journey-section { padding: 120px 8%; background: var(--navy-bg); text-align: left; }
-        .journey-section h2 { font-size: 3.5rem; margin-bottom: 80px; text-transform: uppercase; font-weight: 700; text-align: center; }
-        .timeline { display: flex; gap: 20px; justify-content: space-between; }
-        .phase { 
-            flex: 1; background: rgba(255,255,255,0.03); padding: 40px 25px; border-radius: 30px; 
-            border: 1px solid var(--glass-border); transition: 0.5s; 
-        }
-        .phase:hover { background: rgba(0, 82, 204, 0.1); border-color: var(--qbay-blue); transform: translateY(-15px); }
-        .phase-num { font-size: 0.7rem; font-weight: 700; color: var(--qbay-blue); letter-spacing: 2px; margin-bottom: 15px; display: block; }
-        .phase h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 600; }
-        .phase p { font-size: 0.9rem; opacity: 0.5; font-weight: 300; line-height: 1.5; }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qbay Career</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <header id="main-header">
-        <div class="header-container">
-            <img src="https://qbaycareer.com/wp-content/uploads/2024/02/Qbay-Career-Logo.png" alt="Qbay Logo" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Wall of Fame</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<!-- HEADER -->
+<header id="header">
+  <img src="assets/logo.png" class="logo">
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Pricing</a>
+    <a href="#">Wall of Fame</a>
+    <a href="#">Blog</a>
+  </nav>
+</header>
 
-    <section class="hero">
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="hero-bg.mp4" type="video/mp4">
-        </video>
+<!-- HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="assets/hero bg.mp4" type="video/mp4">
+  </video>
 
-        <div class="hero-text">
-            <h1>Your Global Career, <br><span>Authenticated.</span></h1>
-        </div>
+  <div class="overlay"></div>
 
-        <div class="trust-bar">
-            <div class="pebble">1500+ Helped</div>
-            <div class="pebble">
-                <img src="https://cdn.trustpilot.net/brand-assets/4.3.0/logo-white.svg" class="trust-logo" alt="Trustpilot">
-                4.8 Rating
-            </div>
-            <div class="pebble">90-Day Landings</div>
-            <div class="pebble">Gov Approved</div>
-        </div>
-    </section>
-
-    <div id="sticky-cta-container">
-        <div class="cta-bar">
-            <a href="#" class="cta-btn gmeet">
-                <img src="https://www.gstatic.com/apps/signup/resources/Meet_Product_Icon.svg" alt="Google Meet">
-                Book Strategy Call
-            </a>
-            <a href="#" class="cta-btn whatsapp">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-                WhatsApp Now
-            </a>
-        </div>
+  <div class="hero-content">
+    
+    <div class="logos">
+      <img src="assets/uk.png" class="logo-left">
+      <img src="assets/finland.png" class="logo-right">
     </div>
 
-    <section class="vip-section" id="vip-trigger">
-        <div class="vip-card">
-            <img src="https://qbaycareer.com/wp-content/uploads/2024/02/Qbay-CEO-Fazil.jpg" alt="Founder" class="founder-img">
-            <div class="vip-content">
-                <h2>The Executive Strategy</h2>
-                <p>Modern career transition requires more than just a resume. It requires institutional authority. Secure a direct consultation to map your trajectory in the UK and European markets.</p>
-                <a href="#" class="cta-btn gmeet" style="display:inline-flex;">Request Access</a>
-            </div>
-        </div>
-    </section>
+    <h1 class="headline">Your Global Career, Authenticated</h1>
 
-    <section class="journey-section">
-        <div class="hero-text" style="margin-bottom: 100px;">
-            <h2>The Framework</h2>
-        </div>
-        <div class="timeline">
-            <div class="phase">
-                <span class="phase-num">PHASE 01</span>
-                <h3>Market Intelligence</h3>
-                <p>Data-driven research into the current vacancy landscape in target regions.</p>
-            </div>
-            <div class="phase">
-                <span class="phase-num">PHASE 02</span>
-                <h3>Profile Authority</h3>
-                <p>Engineering ATS-compliant narratives for medical and tech roles.</p>
-            </div>
-            <div class="phase">
-                <span class="phase-num">PHASE 03</span>
-                <h3>Strategic Outreach</h3>
-                <p>High-volume, human-managed application cycles on your behalf.</p>
-            </div>
-            <div class="phase">
-                <span class="phase-num">PHASE 04</span>
-                <h3>Domain Prep</h3>
-                <p>Technical mock interviews led by regional industry experts.</p>
-            </div>
-            <div class="phase">
-                <span class="phase-num">PHASE 05</span>
-                <h3>Post-Landing</h3>
-                <p>Relocation guidance and ongoing professional mentorship.</p>
-            </div>
-        </div>
-    </section>
+    <div class="trust-badges">
+      <div>100k+ Helped</div>
+      <div>Trustpilot 4.8</div>
+      <div>90-Day Calls</div>
+      <div>Gov Approved</div>
+      <div>29 Countries</div>
+    </div>
 
-    <script>
-        window.onscroll = function() {
-            const header = document.getElementById("main-header");
-            const ctaBar = document.getElementById("sticky-cta-container");
-            const vip = document.getElementById("vip-trigger");
-            const scrollPos = window.pageYOffset;
+    <div class="cta-buttons">
+      <button class="cta primary">📅 Book Strategy Call</button>
+      <button class="cta secondary">💬 WhatsApp Now</button>
+    </div>
 
-            // Header and CTA Logic
-            if (scrollPos > 80) {
-                header.classList.add("sticky-oval");
-                ctaBar.classList.add("visible");
-            } else {
-                header.classList.remove("sticky-oval");
-                ctaBar.classList.remove("visible");
-            }
+  </div>
+</section>
 
-            // Scroll Reveal Logic
-            if (scrollPos > 300) {
-                vip.classList.add("revealed");
-            }
-        };
-    </script>
+<!-- STICKY CTA -->
+<div class="sticky-cta">
+  <button class="cta primary">📅 Book Strategy Call</button>
+  <button class="cta secondary">💬 WhatsApp Now</button>
+</div>
+
+<!-- VIP SECTION -->
+<section class="vip">
+  <img src="assets/founder.png">
+  <div>
+    <h2>Claim your free consultation (€99 value)</h2>
+    <p>Talk directly with our expert team and map your global career strategy.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Services</h2>
+  <div class="grid">
+    <div class="card">Guaranteed Interview Calls</div>
+    <div class="card">We Apply For You</div>
+    <div class="card">NHS / HSC Applications</div>
+    <div class="card">CPD Courses</div>
+    <div class="card">Interview Assistance</div>
+    <div class="card">ATS CV & LinkedIn</div>
+    <div class="card">SOP Guidance</div>
+    <div class="card">Internship</div>
+  </div>
+
+  <div class="mental">
+    Mental Wellness Support
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h2>Success Stories</h2>
+  <div class="carousel">
+    <div class="item">WhatsApp Review</div>
+    <div class="item">Video Review</div>
+    <div class="item">Audio Review</div>
+    <div class="item">Text Review</div>
+    <div class="item">Trustpilot Review</div>
+    <div class="item negative">Negative Review + Response</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <h2>Pricing</h2>
+  <div class="plans">
+    <div class="plan">€193<br>Career Plan</div>
+    <div class="plan highlight">€329<br>Master Plan</div>
+    <div class="plan">€639<br>Premium Plan</div>
+  </div>
+
+  <div class="subscription">
+    €219/month – Continued Support
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog">
+  <h2>Latest Insights</h2>
+  <div class="blog-grid">
+    <div class="post">How to land a UK job</div>
+    <div class="post">ATS CV Guide</div>
+    <div class="post">Interview Secrets</div>
+  </div>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
