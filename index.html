@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qbay Career | Authenticated Strategy</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS STYLES START --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #001233; color: white; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* 1. Morphing Header */
+        #main-header {
+            position: fixed; top: 0; width: 100%; padding: 25px 5%;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000;
+        }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { height: 45px; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a { color: white; text-decoration: none; font-weight: 500; opacity: 0.9; font-size: 0.95rem; }
+
+        /* Header State: Sticky Oval */
+        .sticky-oval {
+            top: 15px !important; width: 90% !important; left: 5%;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px);
+            border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 30px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        /* 2. Hero Session & Background Video */
+        .hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        #bg-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.7); }
+
+        /* 3. Repositioned Trust Bar (Top-Left) */
+        .trust-bar {
+            position: absolute; top: 130px; left: 5%; 
+            display: flex; gap: 12px; z-index: 10;
+        }
+        .pebble {
+            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
+            padding: 10px 18px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15); animation: shimmer 4s infinite;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        /* 4. Sticky CTA Bar (0px below header, Left-Aligned) */
+        #sticky-cta-container {
+            position: fixed; top: 85px; left: 6%; /* Positioned slightly to the left */
+            z-index: 999; display: none; 
+        }
+        #sticky-cta-container.visible { display: flex; animation: slideDown 0.4s forwards; }
+
+        .cta-bar { display: flex; gap: 12px; }
+        .cta-btn {
+            padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: bold;
+            color: white; display: flex; align-items: center; gap: 12px; font-size: 0.9rem;
+            transition: all 0.3s ease; animation: breathe 8s infinite;
+        }
+        .gmeet { background: #0052CC; border: 1px solid rgba(255,255,255,0.2); }
+        .whatsapp { background: #25D366; border: 1px solid rgba(255,255,255,0.2); }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        /* 5. Content Styling */
+        .hero-text { text-align: center; z-index: 5; }
+        .hero-text h1 { font-size: 4.5rem; letter-spacing: -2px; line-height: 1; text-transform: uppercase; }
+        .hero-text h1 span { color: #0052CC; text-shadow: 0 0 30px rgba(0,82,204,0.4); }
+
+        /* Animations */
+        @keyframes breathe { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(255,255,255,0.1); } 
+        }
+        @keyframes shimmer { 0%, 100% { opacity: 0.9; } 50% { opacity: 1; background: rgba(255,255,255,0.15); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- CSS STYLES END --- */
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="header-container">
+            <img src="https://qbaycareer.com/wp-content/uploads/2024/02/Qbay-Career-Logo.png" alt="Qbay Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Wall of Fame</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="hero-bg.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-text">
+            <h1 id="headline">Your Global Career, <br><span>Authenticated.</span></h1>
+        </div>
+
+        <div class="trust-bar">
+            <div class="pebble">100k+ Helped</div>
+            <div class="pebble"><i class="fas fa-star" style="color:#25D366;"></i> Trustpilot 4.8</div>
+            <div class="pebble">90-Day Calls</div>
+            <div class="pebble">Gov Approved</div>
+            <div class="pebble">29 Countries</div>
+        </div>
+    </section>
+
+    <div id="sticky-cta-container">
+        <div class="cta-bar">
+            <a href="#" class="cta-btn gmeet"><i class="fab fa-google"></i> Book Strategy Call</a>
+            <a href="#" class="cta-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+        </div>
+    </div>
+
+    <div style="height: 1000px; background: linear-gradient(to bottom, #001233, #000814); padding: 100px 10%;">
+        <h2 style="color: rgba(255,255,255,0.2); font-size: 3rem;">SCROLL TO DISCOVER</h2>
+    </div>
+
+    <script>
+        window.onscroll = function() {
+            const header = document.getElementById("main-header");
+            const ctaBar = document.getElementById("sticky-cta-container");
+            const scrollPos = window.pageYOffset;
+
+            // Trigger Header Morph and CTA Sticky Bar
+            if (scrollPos > 60) {
+                header.classList.add("sticky-oval");
+                ctaBar.classList.add("visible");
+            } else {
+                header.classList.remove("sticky-oval");
+                ctaBar.classList.remove("visible");
+            }
+        };
+    </script>
+</body>
+</html>
