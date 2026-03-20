@@ -1,130 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qbay Career</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qbay Career | Global Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root { --navy: #0a0f1d; --electric: #3b82f6; --v-green: #22c55e; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; overflow-x: hidden; scroll-behavior: smooth; }
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        /* 1. MORPHIC HEADER PILL */
+        .header-ghost { transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .header-morphed { 
+            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(30px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 999px; margin: 20px auto; width: 90%; padding: 12px 45px;
+        }
+
+        /* 2. KINETIC LOGO COLLISION */
+        .logo-box { transition: transform 0.1s linear; z-index: 30; }
+        .hero-video-wrap { filter: saturate(0.8) brightness(0.45) contrast(1.1); }
+
+        /* 3. ASYMMETRICAL STICKY CTAs (LEFT SHIFTED) */
+        .sticky-cta-bar { 
+            position: fixed; top: 115px; left: 14%; 
+            z-index: 95; display: flex; gap: 18px; 
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); transform: translateY(-300%);
+        }
+        .cta-pulse { animation: breathing 10s infinite; }
+        @keyframes breathing { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4)); } }
+
+        /* 4. 3D SUCCESS STORIES ARC */
+        .arc-wrapper { perspective: 2000px; display: flex; gap: 45px; padding: 130px 60px; overflow-x: auto; scrollbar-width: none; }
+        .arc-card { 
+            min-width: 420px; height: 550px; transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); 
+            background: white; border-radius: 50px; border: 1px solid #e2e8f0; transform-style: preserve-3d;
+        }
+        .arc-card:hover { transform: scale(1.18) translateZ(120px) rotateY(-5deg); z-index: 50; box-shadow: 0 45px 90px rgba(0,0,0,0.15); }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+    </style>
 </head>
+<body class="hide-scroll">
 
-<body>
+    <header id="main-header" class="header-ghost fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-14 py-10">
+        <img src="logo.png" alt="Qbay Logo" class="h-10 object-contain">
+        <nav class="hidden md:flex gap-14 font-semibold text-[10px] uppercase tracking-[0.3em] text-slate-400">
+            <a href="#home" class="hover:text-white transition">Home</a>
+            <a href="#about" class="hover:text-white transition">About Me</a>
+            <a href="#wall" class="hover:text-white transition">Wall of Fame</a>
+            <a href="#pricing" class="hover:text-white transition">Pricing</a>
+            <a href="#blog" class="hover:text-white transition">Blog</a>
+        </nav>
+        <div class="w-10"></div>
+    </header>
 
-<!-- HEADER -->
-<header id="header">
-  <img src="assets/logo.png" class="logo">
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Pricing</a>
-    <a href="#">Wall of Fame</a>
-    <a href="#">Blog</a>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <video autoplay muted loop playsinline class="bg-video">
-    <source src="assets/hero bg.mp4" type="video/mp4">
-  </video>
-
-  <div class="overlay"></div>
-
-  <div class="hero-content">
-    
-    <div class="logos">
-      <img src="assets/uk.png" class="logo-left">
-      <img src="assets/finland.png" class="logo-right">
+    <div id="sticky-cta" class="sticky-cta-bar">
+        <button class="cta-pulse bg-[#3B82F6] text-white px-10 py-4 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-2xl">Book a Strategy Call</button>
+        <button class="cta-pulse bg-[#22C55E] text-white px-10 py-4 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-2xl">WhatsApp Now</button>
     </div>
 
-    <h1 class="headline">Your Global Career, Authenticated</h1>
+    <section id="home" class="relative h-screen flex items-center justify-center bg-[#060912] overflow-hidden">
+        <video id="hero-vid" autoplay muted loop playsinline class="hero-video-wrap absolute inset-0 w-full h-full object-cover">
+            <source src="hero-bg-video.mp4" type="video/mp4">
+        </video>
+        <div class="relative z-10 w-full flex justify-between items-center px-24">
+            <div id="uk-logo" class="logo-box w-40 h-40 bg-white/5 rounded-full flex items-center justify-center backdrop-blur-3xl border border-white/10 text-white text-[11px] font-bold">UK GOV</div>
+            <div id="hero-reveal" class="opacity-0 text-center transform scale-75 transition-all duration-1000">
+                <h1 class="serif text-7xl text-white leading-tight mb-12">Your Global Career,<br><span class="italic font-light opacity-80">Authenticated.</span></h1>
+            </div>
+            <div id="fi-logo" class="logo-box w-40 h-40 bg-white/5 rounded-full flex items-center justify-center backdrop-blur-3xl border border-white/10 text-white text-[11px] font-bold">FINLAND</div>
+        </div>
+    </section>
 
-    <div class="trust-badges">
-      <div>100k+ Helped</div>
-      <div>Trustpilot 4.8</div>
-      <div>90-Day Calls</div>
-      <div>Gov Approved</div>
-      <div>29 Countries</div>
-    </div>
+    <section id="about" class="py-44 bg-white px-20 lg:px-44">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div>
+                <h2 class="serif text-5xl mb-10">From Confusion to <br><span class="italic font-light">Global Confidence.</span></h2>
+                <div class="space-y-6 text-slate-500 leading-relaxed text-lg">
+                    <p>Qbay Career is a transformation platform dedicated to turning potential into global reality. Born from the understanding of today’s complex job market, we combine expert mentorship with institutional strategy.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-8">
+                <div class="text-center">
+                    <img src="founder-1.png" class="rounded-[40px] shadow-2xl mb-6 grayscale hover:grayscale-0 transition duration-700">
+                    <h4 class="font-bold text-sm uppercase">Fazil Karatt</h4>
+                    <p class="text-[10px] text-blue-500 font-bold uppercase tracking-widest">Founder & CEO</p>
+                </div>
+                <div class="text-center mt-12">
+                    <img src="founder-2.png" class="rounded-[40px] shadow-2xl mb-6 grayscale hover:grayscale-0 transition duration-700">
+                    <h4 class="font-bold text-sm uppercase">Dr. Mohammed Shafeeq</h4>
+                    <p class="text-[10px] text-blue-500 font-bold uppercase tracking-widest">Co-Founder</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="cta-buttons">
-      <button class="cta primary">📅 Book Strategy Call</button>
-      <button class="cta secondary">💬 WhatsApp Now</button>
-    </div>
+    <section id="wall" class="py-44 bg-[#F9F9FB] overflow-hidden">
+        <h2 class="serif text-center text-5xl mb-24 italic">The Success Stories Arc</h2>
+        <div id="arc-scroll" class="arc-wrapper hide-scroll">
+            <div class="arc-card p-12 flex flex-col justify-between border-slate-100 shadow-sm">
+                <span class="text-[#22C55E] font-bold text-[10px] uppercase">WhatsApp Verified</span>
+                <div class="bg-slate-50 rounded-[35px] h-80 border overflow-hidden flex items-center justify-center text-slate-300">Screenshot Placeholder</div>
+                <p class="text-[13px] italic opacity-50">"Dublin clinical role finalized. Thank you Qbay."</p>
+            </div>
+            <div class="arc-card p-12 bg-[#060912] text-white flex flex-col justify-center items-center text-center">
+                <div class="flex gap-2 h-16 mb-12 items-end"><div class="w-2 bg-blue-500 h-10 animate-pulse"></div><div class="w-2 bg-blue-400 h-16 animate-pulse"></div><div class="w-2 bg-blue-600 h-8 animate-pulse"></div></div>
+                <button class="bg-white text-black px-12 py-5 rounded-full font-bold text-[10px] uppercase tracking-widest">▶ Play Voice Success</button>
+            </div>
+            <div class="arc-card p-12 flex flex-col justify-between border-red-50">
+                <div class="bg-red-50/70 p-8 rounded-[30px] border-l-4 border-red-500"><p class="text-[12px] italic">"Communication was slow initially."</p></div>
+                <div class="bg-[#0a0f1d] p-10 rounded-[35px] text-white shadow-2xl">
+                    <span class="text-blue-400 text-[9px] font-bold uppercase">Response</span>
+                    <p class="text-[11px] opacity-70 mt-4 leading-relaxed">Accuracy over speed. Our audit caught a regulatory change. Result: Secured.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </div>
-</section>
+    <section id="pricing" class="py-44 bg-slate-50 px-28">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-28">
+            <div class="bg-white p-16 rounded-[60px] border shadow-sm">
+                <h3 class="serif text-3xl mb-12">Career</h3><p class="text-5xl font-bold mb-14">€193</p>
+                <button class="w-full py-5 rounded-full border-2 border-black font-bold text-[10px] uppercase tracking-widest">Invest Now</button>
+            </div>
+            <div class="bg-white p-16 rounded-[60px] border-2 border-blue-500 shadow-3xl scale-110 z-10">
+                <h3 class="serif text-3xl mb-12">Master</h3><p class="text-5xl font-bold mb-14">€329</p>
+                <button class="w-full py-5 bg-blue-600 text-white rounded-full font-bold text-[10px] uppercase tracking-widest shadow-xl">Invest Now</button>
+            </div>
+            <div class="bg-white p-16 rounded-[60px] border shadow-sm">
+                <h3 class="serif text-3xl mb-12">Premium</h3><p class="text-5xl font-bold mb-14">€639</p>
+                <button class="w-full py-5 rounded-full border-2 border-black font-bold text-[10px] uppercase tracking-widest">Invest Now</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="p-12 bg-blue-100/30 rounded-[40px] text-[11px] font-bold italic border border-blue-200/20 text-slate-600">"The Master plan saved me months of rejection letters."</div>
+            <div class="p-12 bg-blue-100/30 rounded-[40px] text-[11px] font-bold italic border border-blue-200/20 text-slate-600">"The strategy call is the foundation of the success."</div>
+            <div class="p-12 bg-blue-100/30 rounded-[40px] text-[11px] font-bold italic border border-blue-200/20 text-slate-600">"Total institutional clarity on the UK Market."</div>
+        </div>
+    </section>
 
-<!-- STICKY CTA -->
-<div class="sticky-cta">
-  <button class="cta primary">📅 Book Strategy Call</button>
-  <button class="cta secondary">💬 WhatsApp Now</button>
-</div>
+    <section id="blog" class="py-44 bg-[#0a0f1d] text-white px-20 lg:px-44">
+        <h2 class="serif text-5xl mb-20 italic">Market Intelligence Lab</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 rounded-[50px] bg-white/5 border border-white/10 p-12">
+                <span class="bg-blue-600 px-4 py-1 rounded-full text-[9px] font-bold uppercase mb-8 inline-block">Featured Analysis</span>
+                <h3 class="serif text-4xl mb-6">The 2026 UK Healthcare Post-Regulatory Impact</h3>
+                <p class="text-slate-400 mb-10 leading-relaxed">Institutional deep-dive into GMC policy updates.</p>
+                <button class="text-[10px] font-bold uppercase tracking-widest border-b border-blue-500 pb-2">Read Full Analysis</button>
+            </div>
+            <div class="space-y-8">
+                <h4 class="text-xl font-semibold border-b border-white/10 pb-6">Ireland's Pharmaceutical Boom Roadmap</h4>
+                <h4 class="text-xl font-semibold border-b border-white/10 pb-6">The CV Narration Framework</h4>
+                <h4 class="text-xl font-semibold border-b border-white/10 pb-6">Finland Tech-Visa Updates</h4>
+            </div>
+        </div>
+    </section>
 
-<!-- VIP SECTION -->
-<section class="vip">
-  <img src="assets/founder.png">
-  <div>
-    <h2>Claim your free consultation (€99 value)</h2>
-    <p>Talk directly with our expert team and map your global career strategy.</p>
-  </div>
-</section>
+    <script>
+        // 1. VIDEO SPEED CONTROL
+        const vid = document.getElementById('hero-vid');
+        vid.playbackRate = 0.5;
 
-<!-- SERVICES -->
-<section class="services">
-  <h2>Our Services</h2>
-  <div class="grid">
-    <div class="card">Guaranteed Interview Calls</div>
-    <div class="card">We Apply For You</div>
-    <div class="card">NHS / HSC Applications</div>
-    <div class="card">CPD Courses</div>
-    <div class="card">Interview Assistance</div>
-    <div class="card">ATS CV & LinkedIn</div>
-    <div class="card">SOP Guidance</div>
-    <div class="card">Internship</div>
-  </div>
+        // 2. SCROLL ENGINE
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            const header = document.getElementById('main-header');
+            const cta = document.getElementById('sticky-cta');
+            const ukLogo = document.getElementById('uk-logo');
+            const fiLogo = document.getElementById('fi-logo');
+            const reveal = document.getElementById('hero-reveal');
 
-  <div class="mental">
-    Mental Wellness Support
-  </div>
-</section>
+            const prog = Math.min(scroll / 650, 1);
+            const move = (window.innerWidth / 3.4) * (1 - prog);
+            ukLogo.style.transform = `translateX(${move}px)`;
+            fiLogo.style.transform = `translateX(-${move}px)`;
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <h2>Success Stories</h2>
-  <div class="carousel">
-    <div class="item">WhatsApp Review</div>
-    <div class="item">Video Review</div>
-    <div class="item">Audio Review</div>
-    <div class="item">Text Review</div>
-    <div class="item">Trustpilot Review</div>
-    <div class="item negative">Negative Review + Response</div>
-  </div>
-</section>
+            if (prog >= 0.96) { reveal.classList.add('opacity-100', 'scale-100'); reveal.classList.remove('opacity-0', 'scale-75'); }
 
-<!-- PRICING -->
-<section class="pricing">
-  <h2>Pricing</h2>
-  <div class="plans">
-    <div class="plan">€193<br>Career Plan</div>
-    <div class="plan highlight">€329<br>Master Plan</div>
-    <div class="plan">€639<br>Premium Plan</div>
-  </div>
+            if (scroll > 200) {
+                header.classList.add('header-morphed');
+                header.classList.remove('px-14', 'py-10');
+                cta.style.transform = "translateY(0)";
+            } else {
+                header.classList.remove('header-morphed');
+                header.classList.add('px-14', 'py-10');
+                cta.style.transform = "translateY(-300%)";
+            }
+        });
 
-  <div class="subscription">
-    €219/month – Continued Support
-  </div>
-</section>
-
-<!-- BLOG -->
-<section class="blog">
-  <h2>Latest Insights</h2>
-  <div class="blog-grid">
-    <div class="post">How to land a UK job</div>
-    <div class="post">ATS CV Guide</div>
-    <div class="post">Interview Secrets</div>
-  </div>
-</section>
-
-<script src="script.js"></script>
+        // 3. AUTO-FLOW ARC
+        const arc = document.getElementById('arc-scroll');
+        setInterval(() => {
+            if (!arc.matches(':hover')) {
+                arc.scrollLeft += 1.2;
+                if (arc.scrollLeft >= (arc.scrollWidth - arc.clientWidth)) arc.scrollLeft = 0;
+            }
+        }, 25);
+    </script>
 </body>
 </html>
